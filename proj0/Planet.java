@@ -11,7 +11,9 @@ public class Planet {
     /* good practice to declare any constants as a "static final" variable in our class. That is, "final" indicates no changes can be made to this variable after its initial declaration and initialization */
     /* Note: java supports scientific notation, so the below two declarations and initializations of g are valid. */
 /*    static final double g = 0.0000000000667;*/
-    static final double g = 6.67e-11;
+
+    /* make below private variable because we don't want it accessed out of this class. */
+    private static final double g = 6.67e-11;
 
     public Planet(double xP, double yP, double xV, double yV, double m, String img) {
         xxPos = xP;
