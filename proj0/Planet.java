@@ -1,10 +1,12 @@
 public class Planet {
-    double xxPos;
-    double yyPos;
-    double xxVel;
-    double yyVel;
-    double mass;
-    String imgFileName;
+
+    /* class variables should be made "public" not just declared as is, ie. "public double xxPos" and not "double xxPos." */
+    public double xxPos;
+    public double yyPos;
+    public double xxVel;
+    public double yyVel;
+    public double mass;
+    public String imgFileName;
 
     /* good practice to declare any constants as a "static final" variable in our class. That is, "final" indicates no changes can be made to this variable after its initial declaration and initialization */
     /* Note: java supports scientific notation, so the below two declarations and initializations of g are valid. */
@@ -24,8 +26,8 @@ public class Planet {
         this(p.xxPos, p.yyPos, p.xxVel, p.yyVel, p.mass, p.imgFileName);
     }
 
-    /** gives the square root of a number */
-    public static double square(double number){
+    /** gives the square root of a number. Since this is only going to be used in the class, we should make the method private. */
+    private static double square(double number){
         double t;
         double squareroot = number / 2;
         do
