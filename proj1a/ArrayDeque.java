@@ -31,8 +31,8 @@ public class ArrayDeque<T> {
         float usageratio = (float) size / items.length;
         int capacity = (int) (items.length*2);
         if (usageratio < 0.25) {
-            capacity = capacity/2;
-            System.out.println("Usage ratio is below 25%, so the multiplier effect has been halved.");
+            capacity = items.length/4;
+            System.out.println("Usage ratio is below 25%, so the multiplier effect is using a fraction and not an integer.");
         }
         T[] temp = (T[]) new Object[capacity];
         System.arraycopy(items, startsource, temp, startdestination, capacity);
@@ -44,14 +44,14 @@ public class ArrayDeque<T> {
         if (index - 1 < 0){
             return index = items.length - 1;
         }
-            return index = (index - 1) % (items.length - 1);
+            return index = index - 1;
     }
 
     private int plusOne(int index) {
         if (index + 1 > items.length - 1) {
             index = 0;
         }
-            return index = (index + 1) % (items.length - 1);
+            return index = index + 1;
     }
 
     public void addFirst(T item) {
@@ -80,7 +80,6 @@ public class ArrayDeque<T> {
         return size;
     }
 
-    /* fix */
     public void printDeque() {
         if (isEmpty()) {
             System.out.println("Null");
@@ -90,7 +89,6 @@ public class ArrayDeque<T> {
             i++;
         }
     }
-
 
     public T removeFirst() {
         if (isEmpty()){
@@ -115,7 +113,20 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
-        return items[index];
+/*        if (index <= items.length - 1 && index >= 0) {
+            if (index == 0)
+                return items[index + 1];
+            if (index == 1) {
+                return items[0];
+            }
+            else {
+                return items[index]
+            }
+            return items[minusOne(index)];
+        }*/
+        if (index > head || index < tail)
+            return items[index];
+        return null;
     }
 
 }

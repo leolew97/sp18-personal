@@ -114,23 +114,22 @@ public class LinkedListDequeTest {
 	/** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
 	public static void getTest() {
 
-		System.out.println("Running add/remove test.");
+		System.out.println("Running getTest.");
 
 		/*		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");*/
 		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
-		// should be empty
-		boolean passed = checkEmpty(true, lld1.isEmpty());
 
-		lld1.addFirst(10);
-		// should not be empty
-		passed = checkEmpty(false, lld1.isEmpty()) && passed;
-
-		lld1.removeFirst();
-		// should be empty
-		passed = checkEmpty(true, lld1.isEmpty()) && passed;
+		lld1.addFirst(1);
 		lld1.addFirst(2);
-		int v = lld1.get(0);
-		printTestStatus(passed);
+		lld1.addFirst(3);
+		lld1.addFirst(4);
+		lld1.addFirst(5);
+		lld1.addFirst(6);
+		lld1.addFirst(7);
+		int v = lld1.get(5);
+		int j = lld1.get(0);
+		org.junit.Assert.assertEquals(2, v);
+		org.junit.Assert.assertEquals(7, j);
 	}
 
 	public static void main(String[] args) {

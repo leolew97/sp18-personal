@@ -64,8 +64,8 @@ public class LinkedListDeque<T> {
     }
 
     public void printDeque() {
-        GenList p = sentinel;
-        if (p == hold) {
+        GenList p = sentinel.next;
+        if (isEmpty()) {
             System.out.println("Null");
         }
 
@@ -80,7 +80,7 @@ public class LinkedListDeque<T> {
 /*        if (sentinel.next == hold) {
             return null;
         }*/
-        if (size == 0) {
+        if (isEmpty()) {
             return null;
         }
         GenList p = sentinel.next;
@@ -126,7 +126,7 @@ public class LinkedListDeque<T> {
 /*        if (p.first == hold) {
             return null;
         }*/
-        if (size == 0) {
+        if (isEmpty()) {
             return null;
         }
 
@@ -135,7 +135,7 @@ public class LinkedListDeque<T> {
                 return null;
             }
             p = p.next;
-            index -= 1;
+            index --;
         }
         return p.first;
     }
@@ -146,14 +146,14 @@ public class LinkedListDeque<T> {
 /*        if (p.first == hold) {
             return null;
         }*/
-        if (size == 0) {
+        if (isEmpty() || p.first ==  hold) {
             return null;
         }
         if (index == 0) {
             return p.first;
         }
         p = p.next;
-        index -= 1;
+        index --;
         return getRecursive(index - 1);
     }
 
