@@ -15,9 +15,10 @@ public class LinkedListDeque<T> {
             prev = k;
         }
     }
-    T hold = (T) "filler";
+    private T hold = (T) "filler";
     private GenList sentinel;
     private int size;
+
     /** When we instantiate a generic class, we need to use <>. However, when we have a nested generic class and we want to instantiate within an outer generic class that takes the same generic, then we don't need to
      * use <>. See https://github.com/Berkeley-CS61B/lectureCode-sp18/blob/master/lists3/SLList.java */
 
@@ -76,38 +77,63 @@ public class LinkedListDeque<T> {
     }
 
     public T removeFirst() {
-        if (sentinel.next == hold) {
+/*        if (sentinel.next == hold) {
+            return null;
+        }*/
+        if (size == 0) {
             return null;
         }
         GenList p = sentinel.next;
 
         sentinel.next = p.next;
         p.next.prev = sentinel;
-        size -= 1;
+
+        if (size > 0) {
+            size -= 1;
+        }
+        else {
+            size = 0;
+        }
         return p.first;
     }
 
     public T removeLast() {
-        if (sentinel.prev.first == hold) {
+/*        if (sentinel.prev.first == hold) {
+            return null;
+        }*/
+        if (size == 0) {
             return null;
         }
+
         GenList p = sentinel.prev;
 
         sentinel.prev = p.prev;
         p.prev.next = sentinel.prev;
-        size -= 1;
+
+        if (size > 0) {
+            size -= 1;
+        }
+        else {
+            size = 0;
+        }
 
         return p.first;
     }
 
     public T get(int index) {
-        GenList p = sentinel;
+        GenList p = sentinel.next;
 
-        if (p.first == hold) {
+/*        if (p.first == hold) {
+            return null;
+        }*/
+        if (size == 0) {
             return null;
         }
 
-        while (index != 0 && p.next != hold) {
+        while (index != 0) {
+            if (p.first == hold) {
+                return null;
+            }
             p = p.next;
             index -= 1;
         }
@@ -115,15 +141,19 @@ public class LinkedListDeque<T> {
     }
 
     public T getRecursive(int index) {
-        GenList p = sentinel;
+        GenList p = sentinel.next;
 
-        if (p.first == hold) {
+/*        if (p.first == hold) {
+            return null;
+        }*/
+        if (size == 0) {
             return null;
         }
         if (index == 0) {
             return p.first;
         }
         p = p.next;
+        index -= 1;
         return getRecursive(index - 1);
     }
 
