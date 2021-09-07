@@ -29,6 +29,7 @@ public class ArrayDequeTest {
         test.addFirst("first");
         test.addFirst("middle");
         test.addFirst("last");
+        String j = test.get(5);
     }
 
     public static void addLast() {
@@ -78,8 +79,9 @@ public class ArrayDequeTest {
         int j = lld1.removeLast();
 
 
-
+        int k = lld1.get(0);
         int v = lld1.get(3);
+        int a= lld1.get(8);
 
     }
     public static void main(String[] args) {
