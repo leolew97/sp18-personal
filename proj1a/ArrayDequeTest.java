@@ -12,13 +12,52 @@ public class ArrayDequeTest {
         System.out.println("passed");
     }
 
+    public static void addFirst() {
+        ArrayDeque<String> test = new ArrayDeque<>();
+        test.addFirst("first");
+        test.addFirst("middle");
+        test.addFirst("last");
+        test.addFirst("first");
+        test.addFirst("middle");
+        test.addFirst("last");
+        test.removeFirst();
+        test.addFirst("first");
+        test.addFirst("middle");
+        test.addFirst("last");
+
+        /* becomes full */
+        test.addFirst("first");
+        test.addFirst("middle");
+        test.addFirst("last");
+    }
+
+    public static void addLast() {
+        ArrayDeque<String> test = new ArrayDeque<>();
+        test.addLast("first");
+        test.addLast("middle");
+        test.addLast("last");
+        test.addLast("first");
+        test.addFirst("middle");
+        test.addLast("last");
+        test.removeFirst();
+        test.addLast("first");
+        test.addLast("middle");
+        test.addLast("last");
+
+
+        test.addLast("first");
+        /* becomes full */
+        test.addLast("middle");
+        test.addLast("last");
+    }
+
     public static void getTest() {
 
         System.out.println("Running getTest.");
 
         /*		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");*/
         ArrayDeque<Integer> lld1 = new ArrayDeque<Integer>();
-
+        ArrayDeque<String> lld2 = new ArrayDeque<String>();
         lld1.addFirst(1);
         lld1.addFirst(2);
         lld1.addFirst(3);
@@ -26,18 +65,21 @@ public class ArrayDequeTest {
         lld1.addFirst(5);
         lld1.addFirst(6);
         lld1.addFirst(7);
+        lld2.addLast("first");
+        lld2.addLast("middle");
+        lld2.addLast("last");
+        lld2.addLast("first");
+        lld2.addFirst("middle");
+        lld2.addLast("last");
 
-        lld1.resize(20);
+        int v = lld1.get(3);
 
-/*        int v = lld1.get(5);
-        int j = lld1.get(0);
-        org.junit.Assert.assertEquals(6, v);
-        org.junit.Assert.assertEquals(1, j);*/
     }
     public static void main(String[] args) {
         System.out.println("Running tests.\n");
 /*        addRemove();*/
         getTest();
-
+/*        addFirst();*/
+/*        addLast();*/
     }
 }

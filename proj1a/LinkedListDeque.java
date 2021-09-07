@@ -132,7 +132,8 @@ public class LinkedListDeque<T> {
 
         while (index != 0) {
             if (p.first == hold) {
-                return null;
+/*                return null;*/
+                p = p.next;
             }
             p = p.next;
             index --;
@@ -141,20 +142,21 @@ public class LinkedListDeque<T> {
     }
 
     public T getRecursive(int index) {
-        GenList p = sentinel.next;
+        return getRecursiveHelper(sentinel.next, index);
+    }
 
-/*        if (p.first == hold) {
-            return null;
-        }*/
-        if (isEmpty() || p.first ==  hold) {
+    /* created a helper function so user doesn't need to input a node. */
+    public T getRecursiveHelper(GenList node, int index) {
+        if (isEmpty() || node.first == hold) {
             return null;
         }
+
         if (index == 0) {
-            return p.first;
+            return node.first;
         }
-        p = p.next;
-        index --;
-        return getRecursive(index - 1);
+
+        return getRecursiveHelper(node.next, index - 1);
+
     }
 
 }

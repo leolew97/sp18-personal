@@ -132,11 +132,24 @@ public class LinkedListDequeTest {
 		org.junit.Assert.assertEquals(7, j);
 	}
 
+	public static void getRecursiveTest(){
+		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+		lld1.addFirst(1);
+		lld1.addFirst(2);
+		lld1.addFirst(3);
+		lld1.addFirst(4);
+		lld1.addFirst(5);
+		lld1.addFirst(6);
+		lld1.addFirst(7);
+		int v = lld1.getRecursive(6);
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Running tests.\n");
 /*		addIsEmptySizeTest();
 		addRemoveTest();*/
 /*		removeTest();*/
-		getTest();
+/*		getTest();*/
+		getRecursiveTest();
 	}
 } 

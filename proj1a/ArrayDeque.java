@@ -38,24 +38,24 @@ public class ArrayDeque<T> {
         items = temp;
     }*/
     public void resize(int length) {
-        T[] newArray = (T[]) new Object[length];
+        T[] temp = (T[]) new Object[length];
         if (tail > head) {
-            System.arraycopy(items, head+1, newArray, 0, tail-head-1);
+            System.arraycopy(items, head+1, temp, 0, tail-head-1);
         }
-        else if (head == tail && size != items.length) {
-            System.arraycopy(items, head+1, newArray, 0, items.length-head-1);
-            System.arraycopy(items, 0, newArray, items.length-head-1, tail);
-        }
-        else if (head == tail && size == items.length) {
-            System.arraycopy(items, 0, newArray, 0, items.length);
+/*        else if (head == tail && size != items.length) {
+            System.arraycopy(items, head+1, temp, 0, items.length-head-1);
+            System.arraycopy(items, 0, temp, items.length-head-1, tail);
+        }*/
+        else if (head == tail) {
+            System.arraycopy(items, 0, temp, 0, items.length);
         }
         else { /* this is equivalent to the above head==tail but the size != items.length. This allows us to copy two parts of the array. */
-            System.arraycopy(items, head+1, newArray, 0, items.length-head-1);
-            System.arraycopy(items, 0, newArray, items.length-head-1, tail);
+            System.arraycopy(items, head+1, temp, 0, items.length-head-1);
+            System.arraycopy(items, 0, temp, items.length-head-1, tail);
         }
         head = length-1;
         tail = size;
-        items = newArray;
+        items = temp;
 }
 /*    public void resize(int capacity) {
         T[] temp = (T[]) new Object[capacity];
@@ -75,24 +75,27 @@ public class ArrayDeque<T> {
 
     private int plusOne(int index) {
         if (index + 1 > items.length - 1) {
-            index = 0;
+            return index = 0;
         }
             return index = index + 1;
     }
 
     public void addFirst(T item) {
+        /* adding "head = plusOne(head)" before the resize, because the way we add is to increment size and head, so it's actually impossible for "head == tail && items.length." That is, if head==tail, that means
+        items.length and size are one off from each other, and when items.length == size, then head and tail are one off from each other. If we don't increment before the resize, then we'll get the wrong resize condition.
+         */
         if (items.length == size) {
-/*            resize(0, 0);*/
+            head = plusOne(head);
             resize(items.length*2);
         }
         items[head] = item;
-        head = minusOne(head);
         size ++;
+        head = minusOne(head);
     }
 
     public void addLast(T item) {
         if(size == items.length) {
-            /*            resize(0, 0);*/
+            tail = minusOne(tail);
             resize(items.length*2);
         }
         items[tail] = item;
