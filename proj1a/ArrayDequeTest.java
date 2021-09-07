@@ -65,7 +65,7 @@ public class ArrayDequeTest {
 
         /*		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");*/
         ArrayDeque<Integer> lld1 = new ArrayDeque<Integer>();
-        ArrayDeque<String> lld2 = new ArrayDeque<String>();
+        lld1.addFirst(0);
         lld1.addFirst(1);
         lld1.addFirst(2);
         lld1.addFirst(3);
@@ -73,12 +73,11 @@ public class ArrayDequeTest {
         lld1.addFirst(5);
         lld1.addFirst(6);
         lld1.addFirst(7);
-        lld2.addLast("first");
-        lld2.addLast("middle");
-        lld2.addLast("last");
-        lld2.addLast("first");
-        lld2.addFirst("middle");
-        lld2.addLast("last");
+        lld1.addFirst(8);
+        lld1.addFirst(10);
+        int j = lld1.removeLast();
+
+
 
         int v = lld1.get(3);
 
@@ -86,8 +85,8 @@ public class ArrayDequeTest {
     public static void main(String[] args) {
         System.out.println("Running tests.\n");
 /*        addRemove();*/
-/*        getTest();*/
+        getTest();
 /*        addFirst();*/
-        addLast();
+/*        addLast();*/
     }
 }

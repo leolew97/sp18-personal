@@ -26,44 +26,56 @@ public class ArrayDeque<T> {
 /* since we're just resizing inside this class and nowhere else, decided to make the class private static for memory purposes. However, private static methods cannot access non-static items/items from the outer private static method,
     so I can only convert it to a private non-static method. Also, removed "int capacity" to simply capacity = (length of array)*2. */
 
-/*    private void resize(int startsource, int startdestination) {
-        float usageratio = (float) size / items.length;
-        int capacity = (int) (items.length*2);
-        if (usageratio < 0.25) {
-            capacity = items.length/4;
-            System.out.println("Usage ratio is below 25%, so the multiplier effect is using a fraction and not an integer.");
-        }
-        T[] temp = (T[]) new Object[capacity];
-        System.arraycopy(items, startsource, temp, startdestination, capacity);
-        items = temp;
-    }*/
-    private void resize(int length) {
+/*    private void resize(int length) {
         T[] temp = (T[]) new Object[length];
         if (tail > head) {
             System.arraycopy(items, head+1, temp, 0, tail-head-1);
         }
-/*        else if (head == tail && size != items.length) {
+*//*        else if (head == tail && size != items.length) {
             System.arraycopy(items, head+1, temp, 0, items.length-head-1);
             System.arraycopy(items, 0, temp, items.length-head-1, tail);
-        }*/
+        }*//*
         else if (head == tail) {
             System.arraycopy(items, 0, temp, 0, items.length);
         }
-        else { /* this is equivalent to the above head==tail but the size != items.length. This allows us to copy two parts of the array. */
+        else { *//* this is equivalent to the above head==tail but the size != items.length. This allows us to copy two parts of the array. *//*
             System.arraycopy(items, head+1, temp, 0, items.length-head-1);
             System.arraycopy(items, 0, temp, items.length-head-1, tail);
         }
         head = length-1;
         tail = size;
         items = temp;
-}
-/*    public void resize(int capacity) {
-        T[] temp = (T[]) new Object[capacity];
-        System.arraycopy(items, 0, temp, 1, size);
-        head = 0;
-        tail = size + 1;
-        items = temp;
-    }*/
+}*/
+
+    private void resize(int capacity) {
+
+        T[] newItems = (T[]) new Object[capacity];
+        //  0  1  2  3  4  5  6  7
+        //       [x][x][x][x]       items (copy array)
+        // [ ][ ][ ][ ][ ][ ][ ][ ] newItems
+        //    [x][x][x]   if initSize is an odd number
+        // [ ][ ][ ][ ][ ][ ]
+        int startPos = newItems.length / 2 - size / 2; /* draw a picture */
+        /** Copy */
+  /* // stupid way
+  int oldIndex = (nextFirst + 1 > size - 1) ? (0) : (nextFirst + 1);
+  // if nextF points at the last position, it means we need to start from 0
+  */
+        int oldIndex = head + 1; /* Use MOD operation instead */
+        int newIndex = startPos; /* newIndex for newItems */
+        int count = 0;
+        while (count < size) { /* yes! the original size! */
+            newItems[newIndex] = items[oldIndex % items.length]; /* 3 + 1 = 4, 4 % 4 = 0 */
+            oldIndex++; newIndex++;
+            count++;
+        }
+        /** Set new fields */
+        items = newItems;
+        // size = capacity; bug! we don't need to change size!
+        head = startPos - 1;
+        tail = newIndex; /* or nextFirst + size */
+    }
+
 
     private int minusOne(int index) {
         /* an array is 0 indexed based, while the length of an array is not, so if we want to reach into an array's index using an array length we need to do length - 1. */
@@ -180,7 +192,8 @@ public class ArrayDeque<T> {
             return null;
         }
 
-        int traversingindex = head;
+        /* +1 because head is pointing at a null box. */
+        int traversingindex = head + 1;
 
         while (index != 0) {
             traversingindex = plusOne(traversingindex);
