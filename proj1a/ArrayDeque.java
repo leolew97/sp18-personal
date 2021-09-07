@@ -180,50 +180,13 @@ public class ArrayDeque<T> {
         return temp;
     }
 
-    public T get(int index) {
-/*        if (index <= items.length - 1 && index >= 0) {
-            if (index == 0)
-                return items[index + 1];
-            if (index == 1) {
-                return items[0];
-            }
-            else {
-                return items[index]
-            }
-            return items[minusOne(index)];
-        }
-        if (index > head || index < tail) {
-            return items[index];
-        }
-        if (index <= items.length - 1 && index >= 0) {
-            return items[index];
-        }
-        return null;*/
+/*    public T get(int index) {
 
         if (index < 0 || index >= items.length - 1) {
             return null;
         }
-/*
 
-        if (index == 0) {
-            return items[0];
-        }
-*/
-
-/*        int traversingindex = tail;
-
-        while (index != 0) {
-
-            if (traversingindex != 0) {
-                traversingindex = minusOne(traversingindex);
-                index--;
-            } else {
-                traversingindex = minusOne(items.length-1);
-                index--;
-            }
-        }*/
-
-        /*         +1 because head is pointing at a null box. */
+        *//*         +1 because head is pointing at a null box. *//*
         int traversingindex = head + 1;
 
         while (index != 0) {
@@ -231,13 +194,23 @@ public class ArrayDeque<T> {
             index --;
         }
 
-/*        int traversingindex = tail - 1;
-        while (index != 0) {
-            traversingindex = minusOne(traversingindex);
-            index--;
-        }*/
 
-        return items[traversingindex];
+
+        return items[traversingindex];*/
+
+    public T get(int index) {
+        /* Test at the first place. It makes the condition later more succinct */
+        if (index < 0 || index >= size) {
+            return null;
+        }
+
+        int oldIndex = head + 1; /* will be MODed */
+        while (index > 0) {
+            oldIndex++;
+            index--;
+        }
+        return items[oldIndex % items.length];
+    }
 
 
     }
