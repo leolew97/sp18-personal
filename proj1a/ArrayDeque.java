@@ -57,7 +57,7 @@ public class ArrayDeque<T> {
         }
     }*/
 
-    public void resize(int capacity) {
+    private void resize(int capacity) {
 
         T[] newItems = (T[]) new Object[capacity];
         //  0  1  2  3  4  5  6  7
@@ -108,7 +108,7 @@ public class ArrayDeque<T> {
         items.length and size are one off from each other, and when items.length == size, then head and tail are one off from each other. If we don't increment before the resize, then we'll get the wrong resize condition.
          */
         if (items.length == size) {
-            head = plusOne(head);
+  /*          head = plusOne(head);*/
             resize(items.length * 2);
         }
         items[head] = item;
@@ -121,7 +121,7 @@ public class ArrayDeque<T> {
 
     public void addLast(T item) {
         if (size == items.length) {
-            tail = minusOne(tail);
+/*            tail = minusOne(tail);*/
             resize(items.length * 2);
         }
         items[tail] = item;
@@ -158,6 +158,7 @@ public class ArrayDeque<T> {
         T temp = items[head];
         items[head] = null;
         size -= 1;
+
         if (items.length >= 16 && (float) size / items.length < 0.25) {
             resize(items.length / 2);
         }
@@ -223,18 +224,18 @@ public class ArrayDeque<T> {
         }*/
 
         /*         +1 because head is pointing at a null box. */
-/*        int traversingindex = head + 1;
+        int traversingindex = head + 1;
 
         while (index != 0) {
             traversingindex = plusOne(traversingindex);
             index --;
-        }*/
+        }
 
-        int traversingindex = tail - 1;
+/*        int traversingindex = tail - 1;
         while (index != 0) {
             traversingindex = minusOne(traversingindex);
             index--;
-        }
+        }*/
 
         return items[traversingindex];
 
