@@ -134,6 +134,7 @@ public class LinkedListDequeTest {
 
 	public static void getRecursiveTest(){
 		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+		LinkedListDeque<Integer> lld2 = new LinkedListDeque<Integer>();
 		lld1.addFirst(1);
 		lld1.addFirst(2);
 		lld1.addFirst(3);
@@ -142,6 +143,8 @@ public class LinkedListDequeTest {
 		lld1.addFirst(6);
 		lld1.addFirst(7);
 		int v = lld1.getRecursive(6);
+		int k = lld2.getRecursive(0);
+		int j = lld1.getRecursive(7);
 	}
 
 	public static void main(String[] args) {

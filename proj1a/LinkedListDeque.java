@@ -1,5 +1,6 @@
 public class LinkedListDeque<T> {
 
+
     /** since the class is private, access modifiers are irrelevant, so we can write public or private for the methods within the class and it wouldn't matter, since the overarching class is private, so none of the methods
      * or variables can be accessed since they're automatically considered private. We cannot make the IntList static, because we are passing the generic <T> from the outer class into the nested class. */
 
@@ -132,8 +133,7 @@ public class LinkedListDeque<T> {
 
         while (index != 0) {
             if (p.first == hold) {
-/*                return null;*/
-                p = p.next;
+                return null;
             }
             p = p.next;
             index --;
@@ -142,14 +142,18 @@ public class LinkedListDeque<T> {
     }
 
     public T getRecursive(int index) {
+        int length = size;
+        if (index > length - 1) {
+            return null;
+        }
         return getRecursiveHelper(sentinel.next, index);
     }
 
     /* created a helper function so user doesn't need to input a node. */
-    public T getRecursiveHelper(GenList node, int index) {
-        if (isEmpty() || node.first == hold) {
+    private T getRecursiveHelper(GenList node, int index) {
+/*        if (isEmpty() || node.first == hold) {
             return null;
-        }
+        }*/
 
         if (index == 0) {
             return node.first;

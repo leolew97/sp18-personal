@@ -37,7 +37,7 @@ public class ArrayDeque<T> {
         System.arraycopy(items, startsource, temp, startdestination, capacity);
         items = temp;
     }*/
-    public void resize(int length) {
+    private void resize(int length) {
         T[] temp = (T[]) new Object[length];
         if (tail > head) {
             System.arraycopy(items, head+1, temp, 0, tail-head-1);
