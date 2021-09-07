@@ -4,15 +4,15 @@ public class ArrayDeque<T> {
     private int size;
     private int head;
     private int tail;
-/* casting one of the variables into a float to get float division. */
+    /* casting one of the variables into a float to get float division. */
 
-/*    private float usageratio = (float) size/items.length;*/
+    /*    private float usageratio = (float) size/items.length;*/
 
     public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
 
-/* didn't do head = 0 and tail = 1 to illustrate how this process will work for add/remove methods. */
+        /* didn't do head = 0 and tail = 1 to illustrate how this process will work for add/remove methods. */
 
         head = 0;
         tail = 1;
@@ -34,7 +34,7 @@ public class ArrayDeque<T> {
 *//*        else if (head == tail && size != items.length) {
             System.arraycopy(items, head+1, temp, 0, items.length-head-1);
             System.arraycopy(items, 0, temp, items.length-head-1, tail);*//*
-*//*        }*//*
+     *//*        }*//*
         else if (head == tail) {
             System.arraycopy(items, 0, temp, 0, items.length);
         }
@@ -76,7 +76,8 @@ public class ArrayDeque<T> {
         int count = 0;
         while (count < size) { /* yes! the original size! */
             newItems[newIndex] = items[oldIndex % items.length]; /* 3 + 1 = 4, 4 % 4 = 0 */
-            oldIndex++; newIndex++;
+            oldIndex++;
+            newIndex++;
             count++;
         }
         /** Set new fields */
@@ -89,17 +90,17 @@ public class ArrayDeque<T> {
 
     private int minusOne(int index) {
         /* an array is 0 indexed based, while the length of an array is not, so if we want to reach into an array's index using an array length we need to do length - 1. */
-        if (index - 1 < 0){
+        if (index - 1 < 0) {
             return index = items.length - 1;
         }
-            return index = index - 1;
+        return index = index - 1;
     }
 
     private int plusOne(int index) {
         if (index + 1 > items.length - 1) {
             return index = 0;
         }
-            return index = index + 1;
+        return index = index + 1;
     }
 
     public void addFirst(T item) {
@@ -108,10 +109,10 @@ public class ArrayDeque<T> {
          */
         if (items.length == size) {
             head = plusOne(head);
-            resize(items.length*2);
+            resize(items.length * 2);
         }
         items[head] = item;
-        size ++;
+        size++;
         /* instead of the minusOne helper function, we could also do head = ((head - 1) + items.length) % items.length. We do not need to ever make a full round trip without resizing, so the case of head = 0 means we
         get head = ((0 - 1) + 8) / 8 = 7 / 8 = index 7. We need to do " + items.length " because in Java "-5 % 6" = -5, so we need to add the items.length to wrap around the end of the list.
          */
@@ -119,16 +120,16 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T item) {
-        if(size == items.length) {
+        if (size == items.length) {
             tail = minusOne(tail);
-            resize(items.length*2);
+            resize(items.length * 2);
         }
         items[tail] = item;
         /* instead of the plusOne helper function, we could also do tail = (tail + 1) % items.length. We need to don't need to add the items.length, because we aren't subtracting any values from tail, so it has no
         possibility of becoming negative. Also, remember that 6%6 = 0, because there are no remainders if two integers are divisible.
          */
         tail = plusOne(tail);
-        size ++;
+        size++;
     }
 
     public boolean isEmpty() {
@@ -150,7 +151,7 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        if (isEmpty()){
+        if (isEmpty()) {
             return null;
         }
         head = plusOne(head);
@@ -158,7 +159,7 @@ public class ArrayDeque<T> {
         items[head] = null;
         size -= 1;
         if (items.length >= 16 && (float) size / items.length < 0.25) {
-            resize(items.length/2);
+            resize(items.length / 2);
         }
         return temp;
     }
@@ -173,7 +174,7 @@ public class ArrayDeque<T> {
         size -= 1;
 
         if (items.length >= 16 && (float) size / items.length < 0.25) {
-            resize(items.length/2);
+            resize(items.length / 2);
         }
         return temp;
     }
@@ -201,12 +202,14 @@ public class ArrayDeque<T> {
         if (index < 0 || index >= items.length - 1) {
             return null;
         }
+/*
 
-/*        if (index == 0) {
+        if (index == 0) {
             return items[0];
         }
+*/
 
-        int traversingindex = tail;
+/*        int traversingindex = tail;
 
         while (index != 0) {
 
@@ -218,17 +221,23 @@ public class ArrayDeque<T> {
                 index--;
             }
         }*/
-/*         +1 because head is pointing at a null box. */
-        int traversingindex = head + 1;
+
+        /*         +1 because head is pointing at a null box. */
+/*        int traversingindex = head + 1;
 
         while (index != 0) {
             traversingindex = plusOne(traversingindex);
             index --;
+        }*/
+
+        int traversingindex = tail - 1;
+        while (index != 0) {
+            traversingindex = minusOne(traversingindex);
+            index--;
         }
 
         return items[traversingindex];
 
+
     }
-
-
 }
