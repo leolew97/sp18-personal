@@ -83,7 +83,19 @@ public class LinkedListDequeTest {
 		lld1.removeLast();
 		lld1.addLast("hehe");
 		lld1.addFirst("xD");
-
+		lld1.addFirst("front");
+		lld1.addLast("middle");
+		String j = lld1.get(3);
+		String k = lld1.getRecursive(3);
+		String n = lld1.get(20);
+		String l = lld1.get(5);
+		String o = lld1.get(6);
+		String a = lld1.getRecursive(5);
+		String b = lld1.getRecursive(6);
+		String c = lld1.getRecursive(4);
+		String d = lld1.getRecursive(3);
+		String e = lld1.getRecursive(2);
+		String f = lld1.getRecursive(0);
 		System.out.println("Printing out deque: ");
 		lld1.printDeque();
 
@@ -142,17 +154,30 @@ public class LinkedListDequeTest {
 		lld1.addFirst(5);
 		lld1.addFirst(6);
 		lld1.addFirst(7);
+		lld1.addFirst(1);
+		lld1.addFirst(2);
+		lld1.addFirst(3);
+		lld1.addFirst(4);
+		lld1.addFirst(5);
+		lld1.addFirst(6);
+		lld1.addFirst(7);
+		lld1.addFirst(1);
+		lld1.addFirst(2);
+		lld1.addFirst(3);
+		lld1.addFirst(4);
+		lld1.addFirst(5);
+		lld1.addFirst(6);
+		lld1.addFirst(7);
 		int v = lld1.getRecursive(6);
-		int k = lld2.getRecursive(0);
-		int j = lld1.getRecursive(7);
+		int j = lld1.getRecursive(11);
 	}
 
 	public static void main(String[] args) {
 		System.out.println("Running tests.\n");
 /*		addIsEmptySizeTest();
 		addRemoveTest();*/
-/*		removeTest();*/
+		removeTest();
 /*		getTest();*/
-		getRecursiveTest();
+/*		getRecursiveTest();*/
 	}
 } 

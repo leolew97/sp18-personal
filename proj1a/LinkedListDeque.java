@@ -16,7 +16,7 @@ public class LinkedListDeque<T> {
             prev = k;
         }
     }
-    private T hold = (T) "filler";
+/*    private T hold = (T) "filler";*/
     private GenList sentinel;
     private int size;
 
@@ -24,6 +24,7 @@ public class LinkedListDeque<T> {
      * use <>. See https://github.com/Berkeley-CS61B/lectureCode-sp18/blob/master/lists3/SLList.java */
 
     public LinkedListDeque() {
+        T hold = (T) "filler";
         sentinel = new GenList(hold, null, null);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
@@ -71,7 +72,8 @@ public class LinkedListDeque<T> {
         }
 
         /* initially i did "p != hold" but we run into an infinite loop this way. This condition is not the same as "p.first != hold" */
-        while (p.first != hold) {
+/*        while (p.first != hold) {*/
+        while (p != sentinel) {
             p = p.next;
             System.out.println(p);
         }
@@ -102,14 +104,15 @@ public class LinkedListDeque<T> {
 /*        if (sentinel.prev.first == hold) {
             return null;
         }*/
-        if (size == 0) {
+        if (isEmpty()) {
             return null;
         }
 
         GenList p = sentinel.prev;
 
         sentinel.prev = p.prev;
-        p.prev.next = sentinel.prev;
+/*        p.prev.next = sentinel.prev;*/
+        p.prev.next = sentinel;
 
         if (size > 0) {
             size -= 1;
@@ -132,7 +135,9 @@ public class LinkedListDeque<T> {
         }
 
         while (index != 0) {
-            if (p.first == hold) {
+ /*           if (p.first == hold) {*/
+            /* handles a special case if we're on the last index with index = 1. If we did "p == sentinel" then we'd return "filler." */
+            if (p.next == sentinel) {
                 return null;
             }
             p = p.next;
@@ -142,18 +147,15 @@ public class LinkedListDeque<T> {
     }
 
     public T getRecursive(int index) {
-        int length = size;
-        if (index > length - 1) {
-            return null;
-        }
         return getRecursiveHelper(sentinel.next, index);
     }
 
     /* created a helper function so user doesn't need to input a node. */
     private T getRecursiveHelper(GenList node, int index) {
-/*        if (isEmpty() || node.first == hold) {
+/*        if (isEmpty() || node.first == hold) {*/
+        if (isEmpty() || node == sentinel) {
             return null;
-        }*/
+        }
 
         if (index == 0) {
             return node.first;

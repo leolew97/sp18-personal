@@ -90,6 +90,9 @@ public class ArrayDeque<T> {
         }
         items[head] = item;
         size ++;
+        /* instead of the minusOne helper function, we could also do head = ((head - 1) + items.length) % items.length. We do not need to ever make a full round trip without resizing, so the case of head = 0 means we
+        get head = ((0 - 1) + 8) / 8 = 7 / 8 = index 7. We need to do " + items.length " because in Java "-5 % 6" = -5, so we need to add the items.length to wrap around the end of the list.
+         */
         head = minusOne(head);
     }
 
@@ -99,6 +102,9 @@ public class ArrayDeque<T> {
             resize(items.length*2);
         }
         items[tail] = item;
+        /* instead of the plusOne helper function, we could also do tail = (tail + 1) % items.length. We need to don't need to add the items.length, because we aren't subtracting any values from tail, so it has no
+        possibility of becoming negative. Also, remember that 6%6 = 0, because there are no remainders if two integers are divisible.
+         */
         tail = plusOne(tail);
         size ++;
     }
@@ -165,10 +171,24 @@ public class ArrayDeque<T> {
 /*        if (index > head || index < tail) {
             return items[index];
         }*/
-        if (index <= items.length - 1 && index >= 0) {
+/*        if (index <= items.length - 1 && index >= 0) {
             return items[index];
+        }*/
+/*        return null;*/
+
+        if (index < 0 || index >= items.length - 1) {
+            return null;
         }
-        return null;
+
+        int traversingindex = head;
+
+        while (index != 0) {
+            traversingindex = plusOne(traversingindex);
+            index --;
+        }
+
+        return items[traversingindex];
+
     }
 
 }

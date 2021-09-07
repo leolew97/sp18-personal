@@ -37,15 +37,23 @@ public class ArrayDequeTest {
         test.addLast("middle");
         test.addLast("last");
         test.addLast("first");
+        String q = test.get(0);
+
         test.addFirst("middle");
         test.addLast("last");
         test.removeFirst();
         test.addLast("first");
         test.addLast("middle");
+
+        String j = test.get(0);
+        String k = test.get(7);
+        String n = test.get(3);
         test.addLast("last");
 
-
         test.addLast("first");
+        String a = test.get(0);
+        String b = test.get(7);
+        String c = test.get(3);
         /* becomes full */
         test.addLast("middle");
         test.addLast("last");
@@ -78,8 +86,8 @@ public class ArrayDequeTest {
     public static void main(String[] args) {
         System.out.println("Running tests.\n");
 /*        addRemove();*/
-        getTest();
+/*        getTest();*/
 /*        addFirst();*/
-/*        addLast();*/
+        addLast();
     }
 }
