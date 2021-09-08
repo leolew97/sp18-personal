@@ -108,7 +108,7 @@ public class ArrayDeque<T> {
         items.length and size are one off from each other, and when items.length == size, then head and tail are one off from each other. If we don't increment before the resize, then we'll get the wrong resize condition.
          */
         if (items.length == size) {
-  /*          head = plusOne(head);*/
+            /*          head = plusOne(head);*/
             resize(items.length * 2);
         }
         items[head] = item;
@@ -121,7 +121,7 @@ public class ArrayDeque<T> {
 
     public void addLast(T item) {
         if (size == items.length) {
-/*            tail = minusOne(tail);*/
+            /*            tail = minusOne(tail);*/
             resize(items.length * 2);
         }
         items[tail] = item;
@@ -180,37 +180,32 @@ public class ArrayDeque<T> {
         return temp;
     }
 
-/*    public T get(int index) {
-
-        if (index < 0 || index >= items.length - 1) {
+    public T get(int index) {
+        if (index < 0 || index >= size) {
             return null;
         }
-
-        *//*         +1 because head is pointing at a null box. *//*
-        int traversingindex = head + 1;
-
+        /*                 +1 because head is pointing at a null box. */
+        int Tindex = head + 1;
         while (index != 0) {
-            traversingindex = plusOne(traversingindex);
-            index --;
+            Tindex = plusOne(Tindex);
+            index--;
         }
-
-
-
-        return items[traversingindex];*/
-
-    public T get(int index) {
-        /* Test at the first place. It makes the condition later more succinct */
+        return items[Tindex];
+        /*    public T get(int index) {
+         *//* "index >= size" is a better way to say "items.length - 1" because arrays are zero indexed, so if we're given an index equal to the size, then we know the index is already +1 out of bounds. *//*
         if (index < 0 || index >= size) {
             return null;
         }
 
-        int oldIndex = head + 1; /* will be MODed */
+        *//* +1 because head is pointing at a null box. *//*
+        int oldIndex = head + 1;
         while (index > 0) {
             oldIndex++;
             index--;
         }
         return items[oldIndex % items.length];
-    }
+    }*/
 
 
     }
+}

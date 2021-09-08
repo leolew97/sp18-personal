@@ -75,6 +75,8 @@ public class ArrayDequeTest {
         lld1.addFirst(6);
         lld1.addFirst(7);
         lld1.addFirst(8);
+        int b = lld1.get(9);
+
         lld1.addFirst(10);
         int j = lld1.removeLast();
 
@@ -96,8 +98,8 @@ public class ArrayDequeTest {
     public static void main(String[] args) {
         System.out.println("Running tests.\n");
 /*        addRemove();*/
-/*        getTest();*/
-        getTest2();
+        getTest();
+/*        getTest2();*/
 /*        addFirst();*/
 /*        addLast();*/
     }
