@@ -90,16 +90,13 @@ public class ArrayDequeTest {
     public static void getTest2() {
         ArrayDeque<Integer> lld1 = new ArrayDeque<Integer>();
         lld1.addFirst(0);
-        lld1.removeFirst();
-        lld1.addFirst(2);
-        lld1.addLast(3);
-        int j = lld1.get(1);
+        int j = lld1.get(0);
     }
     public static void main(String[] args) {
         System.out.println("Running tests.\n");
 /*        addRemove();*/
-        getTest();
-/*        getTest2();*/
+/*        getTest();*/
+        getTest2();
 /*        addFirst();*/
 /*        addLast();*/
     }

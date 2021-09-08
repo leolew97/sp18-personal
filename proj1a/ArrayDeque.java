@@ -184,20 +184,27 @@ public class ArrayDeque<T> {
         if (index < 0 || index >= size) {
             return null;
         }
-        /*                 +1 because head is pointing at a null box. */
-        int Tindex = head + 1;
+/*
+                         +1 because head is pointing at a null box.
+*/
+        int Tindex = plusOne(head);
         while (index != 0) {
             Tindex = plusOne(Tindex);
             index--;
         }
         return items[Tindex];
-        /*    public T get(int index) {
-         *//* "index >= size" is a better way to say "items.length - 1" because arrays are zero indexed, so if we're given an index equal to the size, then we know the index is already +1 out of bounds. *//*
+
+        /*            public T get(int index) {
+         *//*
+          "index >= size" is a better way to say "items.length - 1" because arrays are zero indexed, so if we're given an index equal to the size, then we know the index is already +1 out of bounds.
+*//*
         if (index < 0 || index >= size) {
             return null;
         }
 
-        *//* +1 because head is pointing at a null box. *//*
+*//*
+         +1 because head is pointing at a null box.
+*//*
         int oldIndex = head + 1;
         while (index > 0) {
             oldIndex++;
