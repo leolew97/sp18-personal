@@ -35,25 +35,24 @@ public class ArrayDeque<T> {
         //    [x][x][x]   if initSize is an odd number
         // [ ][ ][ ][ ][ ][ ]
 /*        int startPos = newItems.length / 2 - size / 2; *//* draw a picture */
-        int startPos = 1;
+/*        int startPos = 1;*/
         /** Copy */
   /* //
   // if nextF points at the last position, it means we need to start from 0
   */
         int oldIndex = plusOne(head); /* Without plusOne(head), we can use MOD operation instead, so it'd be "int oldIndex = head + 1" */
-        int newIndex = startPos; /* newIndex for newItems */
+        int newIndex = 1; /* newIndex for newItems */
         int count = 0;
-        while (count < size) { /* yes! the original size! */
+        while (count < size) { /* yes! the original size! Since count represents an array index, a size of 8 is equivalent to count being 7 (array indexes are always one less than its length value). */
             newItems[newIndex] = items[oldIndex]; /* 3 + 1 = 4, 4 % 4 = 0. Without plusOne(head), we can use MOD operation instead, so it'd be "items[oldIndex % items.length]" */
             oldIndex = plusOne(oldIndex); /* without plusOne(head), we'd use "oldindex++" here */
             newIndex++;
             count++;
         }
-        /** Set new fields */
+
         items = newItems;
-        // size = capacity; bug! we don't need to change size!
-        head = startPos - 1;
-        tail = newIndex; /* or nextFirst + size */
+        head = 0;
+        tail = newIndex; 
     }
 
 
