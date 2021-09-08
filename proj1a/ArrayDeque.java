@@ -26,37 +26,6 @@ public class ArrayDeque<T> {
 /* since we're just resizing inside this class and nowhere else, decided to make the class private static for memory purposes. However, private static methods cannot access non-static items/items from the outer private static method,
     so I can only convert it to a private non-static method. Also, removed "int capacity" to simply capacity = (length of array)*2. */
 
-/*    private void resize(int length) {
-        T[] temp = (T[]) new Object[length];
-        if (tail > head) {
-            System.arraycopy(items, head+1, temp, 0, tail-head-1);
-        }
-*//*        else if (head == tail && size != items.length) {
-            System.arraycopy(items, head+1, temp, 0, items.length-head-1);
-            System.arraycopy(items, 0, temp, items.length-head-1, tail);*//*
-     *//*        }*//*
-        else if (head == tail) {
-            System.arraycopy(items, 0, temp, 0, items.length);
-        }
-        else {  *//*this is equivalent to the above head==tail but the size != items.length. This allows us to copy two parts of the array.*//*
-            System.arraycopy(items, head+1, temp, 0, items.length-head-1);
-            System.arraycopy(items, 0, temp, items.length-head-1, tail);
-        }
-        head = length-1;
-        tail = size;
-        items = temp;
-}*/
-
-
-/*    private void resize(int length) {
-        T[] temp = (T[]) new Object[length];
-        if (tail > head) {
-            for (int i = 0, j = 1; i < tail-head-1 < i++, j++) {
-                temp[i] = items[j];
-            }
-        }
-    }*/
-
     private void resize(int capacity) {
 
         T[] newItems = (T[]) new Object[capacity];
@@ -65,7 +34,8 @@ public class ArrayDeque<T> {
         // [ ][ ][ ][ ][ ][ ][ ][ ] newItems
         //    [x][x][x]   if initSize is an odd number
         // [ ][ ][ ][ ][ ][ ]
-        int startPos = newItems.length / 2 - size / 2; /* draw a picture */
+/*        int startPos = newItems.length / 2 - size / 2; *//* draw a picture */
+        int startPos = 1;
         /** Copy */
   /* //
   // if nextF points at the last position, it means we need to start from 0
@@ -75,8 +45,7 @@ public class ArrayDeque<T> {
         int count = 0;
         while (count < size) { /* yes! the original size! */
             newItems[newIndex] = items[oldIndex]; /* 3 + 1 = 4, 4 % 4 = 0. Without plusOne(head), we can use MOD operation instead, so it'd be "items[oldIndex % items.length]" */
-/*            oldIndex++;*/
-            oldIndex = plusOne(oldIndex);
+            oldIndex = plusOne(oldIndex); /* without plusOne(head), we'd use "oldindex++" here */
             newIndex++;
             count++;
         }
