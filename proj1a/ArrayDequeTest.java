@@ -95,8 +95,8 @@ public class ArrayDequeTest {
     public static void main(String[] args) {
         System.out.println("Running tests.\n");
 /*        addRemove();*/
-/*        getTest();*/
-        getTest2();
+        getTest();
+/*        getTest2();*/
 /*        addFirst();*/
 /*        addLast();*/
     }

@@ -76,7 +76,7 @@ public class ArrayDeque<T> {
         while (count < size) { /* yes! the original size! */
             newItems[newIndex] = items[oldIndex]; /* 3 + 1 = 4, 4 % 4 = 0. Without plusOne(head), we can use MOD operation instead, so it'd be "items[oldIndex % items.length]" */
 /*            oldIndex++;*/
-            plusOne(oldIndex);
+            oldIndex = plusOne(oldIndex);
             newIndex++;
             count++;
         }
