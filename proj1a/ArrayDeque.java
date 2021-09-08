@@ -67,16 +67,16 @@ public class ArrayDeque<T> {
         // [ ][ ][ ][ ][ ][ ]
         int startPos = newItems.length / 2 - size / 2; /* draw a picture */
         /** Copy */
-  /* // stupid way
-  int oldIndex = (nextFirst + 1 > size - 1) ? (0) : (nextFirst + 1);
+  /* //
   // if nextF points at the last position, it means we need to start from 0
   */
-        int oldIndex = head + 1; /* Use MOD operation instead */
+        int oldIndex = plusOne(head); /* Without plusOne(head), we can use MOD operation instead, so it'd be "int oldIndex = head + 1" */
         int newIndex = startPos; /* newIndex for newItems */
         int count = 0;
         while (count < size) { /* yes! the original size! */
-            newItems[newIndex] = items[oldIndex % items.length]; /* 3 + 1 = 4, 4 % 4 = 0 */
-            oldIndex++;
+            newItems[newIndex] = items[oldIndex]; /* 3 + 1 = 4, 4 % 4 = 0. Without plusOne(head), we can use MOD operation instead, so it'd be "items[oldIndex % items.length]" */
+/*            oldIndex++;*/
+            plusOne(oldIndex);
             newIndex++;
             count++;
         }
@@ -184,35 +184,29 @@ public class ArrayDeque<T> {
         if (index < 0 || index >= size) {
             return null;
         }
-/*
-                         +1 because head is pointing at a null box.
-*/
-        int Tindex = plusOne(head);
+        /* +1 because head is pointing at a null box. Without the helper function plusOne(head), see below get() for an alternative method. */
+        int travelingindex = plusOne(head);
         while (index != 0) {
-            Tindex = plusOne(Tindex);
+            travelingindex = plusOne(travelingindex);
             index--;
         }
-        return items[Tindex];
+        /* below can be rewritten as: return items[oldIndex % items.length]. Note: when 8%8 = 0 since no remainders, so it modulos always wrap around. */
+        return items[travelingindex];
+    }
 
-        /*            public T get(int index) {
-         *//*
-          "index >= size" is a better way to say "items.length - 1" because arrays are zero indexed, so if we're given an index equal to the size, then we know the index is already +1 out of bounds.
-*//*
+    /* without plusOne() and minusOne() helper functions. */
+
+/*    public T get(int index) {
+        *//* Test at the first place. It makes the condition later more succinct *//*
         if (index < 0 || index >= size) {
             return null;
         }
 
-*//*
-         +1 because head is pointing at a null box.
-*//*
-        int oldIndex = head + 1;
+        int oldIndex = nextFirst + 1; *//* will be MODed *//*
         while (index > 0) {
             oldIndex++;
             index--;
         }
         return items[oldIndex % items.length];
     }*/
-
-
-    }
 }
