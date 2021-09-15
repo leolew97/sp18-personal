@@ -1,6 +1,4 @@
-
-
-public class Palindrome extends OffByOne {
+public class Palindrome {
 
     public Deque<Character> wordToDeque(String word){
         Deque<Character> holder = new LinkedListDeque<>();
